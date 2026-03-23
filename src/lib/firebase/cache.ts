@@ -5,6 +5,7 @@ const COLLECTION = 'cache';
 export async function getCached<T>(key: string, ttlSeconds: number): Promise<T | null> {
   try {
     const db = getAdminDb();
+    if (!db) return null;
     const doc = await db.collection(COLLECTION).doc(key).get();
     if (!doc.exists) return null;
 
@@ -24,6 +25,7 @@ export async function getCached<T>(key: string, ttlSeconds: number): Promise<T |
 export async function setCached<T>(key: string, payload: T): Promise<void> {
   try {
     const db = getAdminDb();
+    if (!db) return;
     await db.collection(COLLECTION).doc(key).set({
       payload,
       cachedAt: new Date(),
