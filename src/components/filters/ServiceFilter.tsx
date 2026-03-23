@@ -10,26 +10,33 @@ interface ServiceFilterProps {
 
 export function ServiceFilter({ options, selected, onChange }: ServiceFilterProps) {
   const toggle = (value: string) => {
-    onChange(
-      selected.includes(value)
-        ? selected.filter(v => v !== value)
-        : [...selected, value]
-    );
+    onChange(selected.includes(value) ? selected.filter(v => v !== value) : [...selected, value]);
   };
 
   return (
-    <div className="space-y-2">
-      {options.map(opt => (
-        <label key={opt.value} className="flex items-center gap-2.5 cursor-pointer group">
-          <input
-            type="checkbox"
-            checked={selected.includes(opt.value)}
-            onChange={() => toggle(opt.value)}
-            className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
-          />
-          <span className="text-sm text-gray-700 group-hover:text-gray-900">{opt.name}</span>
-        </label>
-      ))}
+    <div className="space-y-1.5">
+      {options.map(opt => {
+        const active = selected.includes(opt.value);
+        return (
+          <label key={opt.value} className="flex items-center gap-3 cursor-pointer group py-1">
+            <div className={`w-4 h-4 rounded flex items-center justify-center flex-shrink-0 transition-colors border ${
+              active
+                ? 'bg-indigo-500 border-indigo-500'
+                : 'bg-slate-800 border-slate-600 group-hover:border-slate-500'
+            }`}>
+              {active && (
+                <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                </svg>
+              )}
+            </div>
+            <input type="checkbox" checked={active} onChange={() => toggle(opt.value)} className="sr-only" />
+            <span className={`text-sm transition-colors ${active ? 'text-slate-100' : 'text-slate-400 group-hover:text-slate-300'}`}>
+              {opt.name}
+            </span>
+          </label>
+        );
+      })}
     </div>
   );
 }

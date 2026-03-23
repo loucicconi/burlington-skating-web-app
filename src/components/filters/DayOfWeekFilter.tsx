@@ -3,15 +3,9 @@
 import type { FilterOption } from '@/types/filters';
 
 const DAY_ABBREVS: Record<string, string> = {
-  Monday: 'Mon',
-  Tuesday: 'Tue',
-  Wednesday: 'Wed',
-  Thursday: 'Thu',
-  Friday: 'Fri',
-  Saturday: 'Sat',
-  Sunday: 'Sun',
+  Monday: 'Mon', Tuesday: 'Tue', Wednesday: 'Wed',
+  Thursday: 'Thu', Friday: 'Fri', Saturday: 'Sat', Sunday: 'Sun',
 };
-
 const DAY_ORDER = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 interface DayOfWeekFilterProps {
@@ -21,16 +15,10 @@ interface DayOfWeekFilterProps {
 }
 
 export function DayOfWeekFilter({ options, selected, onChange }: DayOfWeekFilterProps) {
-  const sorted = [...options].sort(
-    (a, b) => DAY_ORDER.indexOf(a.name) - DAY_ORDER.indexOf(b.name)
-  );
+  const sorted = [...options].sort((a, b) => DAY_ORDER.indexOf(a.name) - DAY_ORDER.indexOf(b.name));
 
   const toggle = (value: string) => {
-    onChange(
-      selected.includes(value)
-        ? selected.filter(v => v !== value)
-        : [...selected, value]
-    );
+    onChange(selected.includes(value) ? selected.filter(v => v !== value) : [...selected, value]);
   };
 
   return (
@@ -42,10 +30,10 @@ export function DayOfWeekFilter({ options, selected, onChange }: DayOfWeekFilter
             key={opt.value}
             onClick={() => toggle(opt.value)}
             aria-pressed={active}
-            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 ${
               active
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-indigo-500 text-white shadow-sm shadow-indigo-900/40'
+                : 'bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-slate-200'
             }`}
           >
             {DAY_ABBREVS[opt.name] ?? opt.name}

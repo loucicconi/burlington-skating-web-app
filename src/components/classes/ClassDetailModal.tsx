@@ -2,11 +2,20 @@
 
 import { useEffect } from 'react';
 import type { NormalizedClass } from '@/types/class';
-import { Badge, SpotsBadge } from '@/components/ui/Badge';
+import { SpotsBadge } from '@/components/ui/Badge';
 
 interface ClassDetailModalProps {
   item: NormalizedClass | null;
   onClose: () => void;
+}
+
+function DetailRow({ label, value }: { label: string; value: React.ReactNode }) {
+  return (
+    <div className="flex items-start justify-between gap-4 py-3 border-b border-slate-50 last:border-0">
+      <span className="text-xs font-medium text-slate-400 uppercase tracking-wide pt-0.5 flex-shrink-0">{label}</span>
+      <span className="text-sm font-medium text-slate-800 text-right">{value}</span>
+    </div>
+  );
 }
 
 export function ClassDetailModal({ item, onClose }: ClassDetailModalProps) {
@@ -21,90 +30,78 @@ export function ClassDetailModal({ item, onClose }: ClassDetailModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-black/40"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm"
       onClick={e => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div className="bg-white w-full max-w-lg rounded-2xl shadow-xl max-h-[90vh] overflow-y-auto">
+      <div className="bg-white w-full max-w-md rounded-3xl shadow-2xl max-h-[90vh] overflow-hidden flex flex-col">
+
+        {/* Coloured header band */}
+        <div className={`h-1.5 w-full rounded-t-3xl ${item.isFull ? 'bg-red-400' : 'bg-indigo-500'}`} />
+
         {/* Header */}
-        <div className="flex items-start justify-between p-5 border-b border-gray-100">
-          <h2 className="font-bold text-lg text-gray-900 pr-4">{item.eventName}</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 flex-shrink-0">
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+        <div className="flex items-start justify-between px-6 pt-5 pb-4">
+          <div className="flex-1 pr-4">
+            <h2 className="font-bold text-lg text-slate-900 leading-snug">{item.eventName}</h2>
+            {item.facility && (
+              <p className="text-sm text-slate-500 mt-0.5 flex items-center gap-1">
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                </svg>
+                {item.facility}
+              </p>
+            )}
+          </div>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-700 transition-colors flex-shrink-0"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
 
+        {/* Availability + price chips */}
+        <div className="px-6 pb-4 flex items-center gap-2">
+          <SpotsBadge spotsText={item.spotsLeft} isFull={item.isFull} />
+          <span className={`text-sm font-bold ${item.isFree ? 'text-emerald-600' : 'text-slate-700'}`}>
+            {item.isFree ? 'Free' : item.priceRange}
+          </span>
+        </div>
+
         {/* Body */}
-        <div className="p-5 space-y-4">
-          {/* Spots + price */}
-          <div className="flex items-center gap-3">
-            <SpotsBadge spotsText={item.spotsLeft} isFull={item.isFull} />
-            <span className={`font-semibold ${item.isFree ? 'text-green-600' : 'text-gray-800'}`}>
-              {item.isFree ? 'FREE' : item.priceRange}
-            </span>
+        <div className="px-6 flex-1 overflow-y-auto">
+          <div className="divide-y divide-slate-50">
+            <DetailRow label="Date" value={item.formattedStartDate} />
+            <DetailRow label="Time" value={`${item.formattedStartTime} – ${item.formattedEndTime}`} />
+            <DetailRow label="Duration" value={`${item.durationMinutes} min`} />
+            {!item.noAgeRestriction && <DetailRow label="Age" value={item.ageRestrictions} />}
+            {item.genderRestrictions && <DetailRow label="Gender" value={item.genderRestrictions} />}
+            {item.numberOfSessions > 1 && <DetailRow label="Sessions" value={item.numberOfSessions} />}
+            <DetailRow label="Course" value={<span className="font-mono text-xs text-slate-500">{item.courseId}</span>} />
           </div>
 
-          {/* Details grid */}
-          <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
-            <div>
-              <dt className="text-gray-500">Location</dt>
-              <dd className="font-medium text-gray-900">{item.facility || '—'}</dd>
-            </div>
-            <div>
-              <dt className="text-gray-500">Date</dt>
-              <dd className="font-medium text-gray-900">{item.formattedStartDate}</dd>
-            </div>
-            <div>
-              <dt className="text-gray-500">Time</dt>
-              <dd className="font-medium text-gray-900">{item.formattedStartTime} – {item.formattedEndTime}</dd>
-            </div>
-            <div>
-              <dt className="text-gray-500">Duration</dt>
-              <dd className="font-medium text-gray-900">{item.durationMinutes} min</dd>
-            </div>
-            {!item.noAgeRestriction && (
-              <div>
-                <dt className="text-gray-500">Age</dt>
-                <dd className="font-medium text-gray-900">{item.ageRestrictions}</dd>
-              </div>
-            )}
-            {item.genderRestrictions && (
-              <div>
-                <dt className="text-gray-500">Gender</dt>
-                <dd className="font-medium text-gray-900">{item.genderRestrictions}</dd>
-              </div>
-            )}
-            {item.numberOfSessions > 1 && (
-              <div>
-                <dt className="text-gray-500">Sessions</dt>
-                <dd className="font-medium text-gray-900">{item.numberOfSessions}</dd>
-              </div>
-            )}
-            <div>
-              <dt className="text-gray-500">Course ID</dt>
-              <dd className="font-medium text-gray-900 font-mono text-xs">{item.courseId}</dd>
-            </div>
-          </dl>
-
-          {/* Description */}
           {item.details && (
-            <div>
-              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">About</p>
-              <p className="text-sm text-gray-700 leading-relaxed">{item.details}</p>
+            <div className="mt-4 mb-2">
+              <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">About</p>
+              <p className="text-sm text-slate-600 leading-relaxed">{item.details}</p>
             </div>
           )}
         </div>
 
-        {/* Footer CTA */}
-        <div className="p-5 pt-0">
+        {/* CTA */}
+        <div className="px-6 py-5 pt-4">
           <a
             href="https://cityofburlington.perfectmind.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition-colors"
+            className="flex items-center justify-center gap-2 w-full bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-semibold py-3 rounded-2xl transition-colors text-sm"
           >
-            {item.bookButtonText || 'Register'} →
+            {item.bookButtonText || 'Register'}
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
           </a>
         </div>
       </div>

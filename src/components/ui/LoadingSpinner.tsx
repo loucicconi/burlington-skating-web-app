@@ -1,22 +1,29 @@
 export function LoadingSpinner({ className = '' }: { className?: string }) {
   return (
     <div className={`flex items-center justify-center ${className}`}>
-      <div className="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
+      <div className="w-7 h-7 border-[3px] border-slate-200 border-t-indigo-500 rounded-full animate-spin" />
     </div>
   );
 }
 
 export function CardSkeleton() {
   return (
-    <div className="bg-white rounded-xl border border-gray-100 p-4 animate-pulse">
-      <div className="flex justify-between mb-3">
-        <div className="h-5 bg-gray-200 rounded w-16" />
-        <div className="h-5 bg-gray-200 rounded w-20" />
+    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden animate-pulse">
+      <div className="w-1 absolute left-0 top-0 bottom-0 bg-slate-100 rounded-l-2xl" />
+      <div className="pl-5 pr-4 pt-4 pb-4 space-y-3">
+        <div className="space-y-2">
+          <div className="h-4 bg-slate-100 rounded-lg w-3/4" />
+          <div className="h-4 bg-slate-100 rounded-lg w-1/2" />
+        </div>
+        <div className="space-y-1.5">
+          <div className="h-3 bg-slate-100 rounded w-2/3" />
+          <div className="h-3 bg-slate-100 rounded w-3/4" />
+        </div>
+        <div className="flex items-center justify-between pt-1 border-t border-slate-50">
+          <div className="h-5 bg-slate-100 rounded-full w-20" />
+          <div className="h-4 bg-slate-100 rounded w-12" />
+        </div>
       </div>
-      <div className="h-6 bg-gray-200 rounded w-3/4 mb-2" />
-      <div className="h-4 bg-gray-200 rounded w-1/2 mb-1" />
-      <div className="h-4 bg-gray-200 rounded w-2/3 mb-4" />
-      <div className="h-9 bg-gray-200 rounded w-28 ml-auto" />
     </div>
   );
 }

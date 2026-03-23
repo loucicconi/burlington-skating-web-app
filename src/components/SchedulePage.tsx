@@ -25,9 +25,25 @@ export function SchedulePage() {
   const { classes, isLoading, isFetchingMore, error, fetchNextPage, hasMore } = useClasses(filters, filterGroups);
 
   return (
-    <div className="flex h-screen overflow-hidden">
-      {/* Sidebar */}
+    <div className="flex h-screen overflow-hidden bg-slate-50">
+      {/* Dark sidebar */}
       <FilterSidebar mobileOpen={mobileFiltersOpen} onClose={() => setMobileFiltersOpen(false)}>
+        {/* Sidebar branding */}
+        <div className="px-5 py-5 border-b border-slate-800 flex-shrink-0">
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-indigo-500 flex items-center justify-center flex-shrink-0">
+              <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5}
+                  d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-white font-semibold text-sm leading-tight">Burlington</p>
+              <p className="text-slate-400 text-xs leading-tight">Recreation</p>
+            </div>
+          </div>
+        </div>
+
         {!filtersLoading && (
           <FilterPanel
             filterGroups={filterGroups}
@@ -41,28 +57,17 @@ export function SchedulePage() {
 
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        {/* App title bar */}
-        <div className="bg-blue-700 text-white px-4 py-3 flex items-center gap-3 flex-shrink-0">
-          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-              d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M11.121 11.121L5 5m6.121 6.121L5 17m6.121-5.879L17 5" />
-          </svg>
-          <h1 className="font-bold text-lg tracking-tight">Burlington Recreation</h1>
-        </div>
-
-        {/* Sticky header with view toggle */}
         <Header
           view={view}
           onViewChange={setView}
           resultCount={classes.length}
           onOpenFilters={() => setMobileFiltersOpen(true)}
           activeFilterCount={activeFilterCount}
+          isLoading={isLoading}
         />
 
-        {/* Error */}
         {error && <ErrorBanner message={(error as Error).message} />}
 
-        {/* Content */}
         <div className="flex-1 overflow-y-auto">
           {view === 'list' ? (
             <ClassList
@@ -84,7 +89,6 @@ export function SchedulePage() {
         </div>
       </div>
 
-      {/* Detail modal */}
       <ClassDetailModal item={selectedClass} onClose={() => setSelectedClass(null)} />
     </div>
   );

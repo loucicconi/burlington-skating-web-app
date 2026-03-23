@@ -29,20 +29,20 @@ function Section({
 }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="border-b border-gray-100 py-4">
+    <div className="border-b border-slate-800/60">
       <button
         onClick={() => setOpen(o => !o)}
-        className="flex items-center justify-between w-full text-left mb-2"
+        className="flex items-center justify-between w-full text-left px-5 py-3.5 hover:bg-slate-800/30 transition-colors"
       >
-        <span className="text-sm font-semibold text-gray-800">{title}</span>
+        <span className="text-xs font-semibold text-slate-300 uppercase tracking-widest">{title}</span>
         <svg
-          className={`w-4 h-4 text-gray-400 transition-transform ${open ? 'rotate-180' : ''}`}
+          className={`w-3.5 h-3.5 text-slate-500 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
           fill="none" viewBox="0 0 24 24" stroke="currentColor"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      {open && <div>{children}</div>}
+      {open && <div className="px-5 pb-4">{children}</div>}
     </div>
   );
 }
@@ -55,34 +55,31 @@ export function FilterPanel({ filterGroups, filters, onChange, onReset, activeFi
   const dayGroup = getGroup(FK.DAY_OF_WEEK);
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col flex-1 min-h-0">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
-        <h2 className="font-semibold text-gray-900">
+      <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-800/60">
+        <span className="text-xs font-semibold text-slate-300 uppercase tracking-widest flex items-center gap-2">
           Filters
           {activeFilterCount > 0 && (
-            <span className="ml-2 inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white text-xs">
+            <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-indigo-500 text-white text-[10px] font-bold">
               {activeFilterCount}
             </span>
           )}
-        </h2>
+        </span>
         {activeFilterCount > 0 && (
           <button
             onClick={onReset}
-            className="text-sm text-blue-600 hover:text-blue-800 font-medium"
+            className="text-xs text-indigo-400 hover:text-indigo-300 font-medium transition-colors"
           >
             Reset all
           </button>
         )}
       </div>
 
-      {/* Scrollable body */}
-      <div className="flex-1 overflow-y-auto px-4">
+      {/* Scrollable sections */}
+      <div className="flex-1 overflow-y-auto sidebar-scroll">
         <Section title="Search">
-          <KeywordFilter
-            value={filters.keyword}
-            onChange={v => onChange('keyword', v)}
-          />
+          <KeywordFilter value={filters.keyword} onChange={v => onChange('keyword', v)} />
         </Section>
 
         <Section title="Date Range">

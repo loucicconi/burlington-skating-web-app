@@ -1,7 +1,7 @@
 'use client';
 
 import type { NormalizedClass } from '@/types/class';
-import { Badge, SpotsBadge } from '@/components/ui/Badge';
+import { SpotsBadge } from '@/components/ui/Badge';
 
 interface ClassCardProps {
   item: NormalizedClass;
@@ -11,58 +11,50 @@ interface ClassCardProps {
 export function ClassCard({ item, onClick }: ClassCardProps) {
   return (
     <div
-      className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 flex flex-col gap-2 hover:shadow-md transition-shadow cursor-pointer"
       onClick={() => onClick?.(item)}
+      className="group relative bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 cursor-pointer overflow-hidden"
     >
-      {/* Top row: spots + price */}
-      <div className="flex items-start justify-between gap-2">
-        <SpotsBadge spotsText={item.spotsLeft} isFull={item.isFull} />
-        <span className={`text-sm font-semibold ${item.isFree ? 'text-green-600' : 'text-gray-700'}`}>
-          {item.isFree ? 'FREE' : item.priceRange}
-        </span>
-      </div>
+      {/* Accent bar */}
+      <div className={`absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl ${item.isFull ? 'bg-red-400' : 'bg-indigo-500'}`} />
 
-      {/* Event name */}
-      <h3 className="font-semibold text-gray-900 leading-snug">{item.eventName}</h3>
+      <div className="pl-5 pr-4 pt-4 pb-4 flex flex-col gap-3">
+        {/* Top: name + price */}
+        <div>
+          <h3 className="font-semibold text-slate-900 leading-snug text-[15px] group-hover:text-indigo-700 transition-colors line-clamp-2">
+            {item.eventName}
+          </h3>
+        </div>
 
-      {/* Facility + date */}
-      <div className="flex flex-wrap gap-x-3 gap-y-1 text-sm text-gray-500">
-        {item.facility && (
-          <span className="flex items-center gap-1">
-            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        {/* Meta row */}
+        <div className="space-y-1.5">
+          {item.facility && (
+            <div className="flex items-center gap-1.5 text-slate-500 text-xs">
+              <svg className="w-3 h-3 flex-shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span className="truncate">{item.facility}</span>
+            </div>
+          )}
+          <div className="flex items-center gap-1.5 text-slate-500 text-xs">
+            <svg className="w-3 h-3 flex-shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
-            {item.facility}
-          </span>
-        )}
-        <span className="flex items-center gap-1">
-          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-          {item.formattedStartDate}
-        </span>
-        <span className="flex items-center gap-1">
-          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          {item.formattedStartTime} – {item.formattedEndTime}
-        </span>
-      </div>
+            <span>{item.formattedStartDate}</span>
+            <span className="text-slate-300">·</span>
+            <span>{item.formattedStartTime} – {item.formattedEndTime}</span>
+          </div>
+        </div>
 
-      {/* Tags row */}
-      <div className="flex flex-wrap gap-1.5 mt-1">
-        {!item.noAgeRestriction && item.ageRestrictions && (
-          <Badge variant="gray">{item.ageRestrictions}</Badge>
-        )}
-        {item.genderRestrictions && item.genderRestrictions !== 'Co-ed' && (
-          <Badge variant="blue">{item.genderRestrictions}</Badge>
-        )}
-        {item.numberOfSessions > 1 && (
-          <Badge variant="gray">{item.numberOfSessions} sessions</Badge>
-        )}
+        {/* Bottom: spots + price */}
+        <div className="flex items-center justify-between pt-1 border-t border-slate-50">
+          <SpotsBadge spotsText={item.spotsLeft} isFull={item.isFull} />
+          <span className={`text-sm font-semibold tabular-nums ${item.isFree ? 'text-emerald-600' : 'text-slate-700'}`}>
+            {item.isFree ? 'Free' : item.priceRange}
+          </span>
+        </div>
       </div>
     </div>
   );
