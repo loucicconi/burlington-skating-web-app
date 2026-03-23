@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -i \"https://cityofburlington.perfectmind.com/Marketing/BookMe4BookingPagesV2/EventFilterGroupsV2?calendarId=517e0420-1478-458e-8a6f-ad813e278ec0&widgetId=a5b21c07-15df-4aee-9505-42bd58803cdf&embed=False\")",
+      "Bash(curl -s -i \"https://cityofburlington.perfectmind.com/22818/Clients/BookMe4V2/GetCategoriesDataV2?embed=False&widgetId=d013ef50-e840-4548-b545-29c8947d3151\")",
+      "Bash(curl -s -i \"https://cityofburlington.perfectmind.com/22818/Clients/BookMe4V2/GetWidgetFilterGroupsV2?widgetId=d013ef50-e840-4548-b545-29c8947d3151\")",
+      "Bash(curl -s \"https://cityofburlington.perfectmind.com/Marketing/BookMe4BookingPagesV2/EventFilterGroupsV2?calendarId=517e0420-1478-458e-8a6f-ad813e278ec0&widgetId=a5b21c07-15df-4aee-9505-42bd58803cdf&embed=False\")",
+      "Bash(curl -s -L \"https://cityofburlington.perfectmind.com/Marketing/BookMe4BookingPages/Classes?calendarId=517e0420-1478-458e-8a6f-ad813e278ec0&widgetId=a5b21c07-15df-4aee-9505-42bd58803cdf&embed=False\" -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\")",
+      "Bash(curl -s \"https://cityofburlington.perfectmind.com/Scripts/BookMe4/Controllers/ClassBookingController.js?03100510\" -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\")",
+      "Bash(curl -s \"https://cityofburlington.perfectmind.com/Marketing/BookMe4BookingPages/Classes?calendarId=517e0420-1478-458e-8a6f-ad813e278ec0&widgetId=a5b21c07-15df-4aee-9505-42bd58803cdf&embed=False\" -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\")",
+      "Bash(curl -s \"https://cityofburlington.perfectmind.com/Scripts/BookMe4/Controllers/ClassBookingV2Controller.js?03100510\" -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\")",
+      "Bash(curl -s \"https://cityofburlington.perfectmind.com/Scripts/perfectMind/AjaxAntiForgeryPost.js?03100510\" -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\")",
+      "Bash(curl -s \"https://cityofburlington.perfectmind.com/Scripts/BookMe4/Components/FilterManager.js?03100510\" -H \"User-Agent: Mozilla/5.0\")",
+      "Bash(curl -s -X POST \"https://cityofburlington.perfectmind.com/Marketing/BookMe4BookingPagesV2/ClassesV2\" -H \"X-Requested-With: XMLHttpRequest\" -H \"Content-Type: application/x-www-form-urlencoded; charset=UTF-8\" -d \"calendarId=517e0420-1478-458e-8a6f-ad813e278ec0&widgetId=a5b21c07-15df-4aee-9505-42bd58803cdf&page=0&dateString=2026-03-23\")",
+      "Bash(curl -s -X GET \"https://cityofburlington.perfectmind.com/Marketing/BookMe4BookingPagesV2/EventFilterGroupsV2?calendarId=517e0420-1478-458e-8a6f-ad813e278ec0&widgetId=a5b21c07-15df-4aee-9505-42bd58803cdf\" -H \"X-Requested-With: XMLHttpRequest\")",
+      "Bash(gh auth:*)",
+      "Bash(unset GITHUB_TOKEN)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --app --src-dir --import-alias \"@/*\" --no-eslint --yes)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\louci\\OneDrive\\Desktop\\personal-dev\\webapp-skating\\src"
+    ]
+  }
+}

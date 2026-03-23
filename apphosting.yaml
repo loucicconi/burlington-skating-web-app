@@ -1,0 +1,17 @@
+runConfig:
+  runtime: nodejs20
+  concurrency: 80
+  minInstances: 0
+  maxInstances: 5
+
+env:
+  - variable: PERFECTMIND_CALENDAR_ID
+    value: 517e0420-1478-458e-8a6f-ad813e278ec0
+  - variable: PERFECTMIND_WIDGET_ID
+    value: a5b21c07-15df-4aee-9505-42bd58803cdf
+  - variable: FIREBASE_PROJECT_ID
+    value: YOUR_FIREBASE_PROJECT_ID
+  - variable: FIREBASE_CLIENT_EMAIL
+    secret: firebase-client-email
+  - variable: FIREBASE_PRIVATE_KEY
+    secret: firebase-private-key

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.burlington.ca)",
+      "WebSearch",
+      "WebFetch(domain:cityofburlington.perfectmind.com)",
+      "Bash(curl -s -i \"https://cityofburlington.perfectmind.com/Marketing/BookMe4BookingPagesV2/ClassesV2?calendarId=517e0420-1478-458e-8a6f-ad813e278ec0&widgetId=a5b21c07-15df-4aee-9505-42bd58803cdf&embed=False\")"
+    ]
+  }
+}
