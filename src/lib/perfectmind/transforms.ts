@@ -25,8 +25,11 @@ export function normalizeClass(raw: PMClass): NormalizedClass {
   const startT = parseTime(raw.FormattedStartTime);
   const endT = parseTime(raw.FormattedEndTime);
 
-  const startDate = new Date(`${baseDate}T${String(startT.h).padStart(2, '0')}:${String(startT.m).padStart(2, '0')}:00`);
-  const endDate = new Date(`${baseDate}T${String(endT.h).padStart(2, '0')}:${String(endT.m).padStart(2, '0')}:00`);
+  // Store as a local ISO string (no Z / UTC offset) so the browser treats the
+  // time as local (Eastern) rather than UTC — avoids a 4-5 hr shift in the calendar.
+  const pad = (n: number) => String(n).padStart(2, '0');
+  const startDate = `${baseDate}T${pad(startT.h)}:${pad(startT.m)}:00`;
+  const endDate   = `${baseDate}T${pad(endT.h)}:${pad(endT.m)}:00`;
 
   const isFull = raw.Spots?.toLowerCase().includes('full') ?? false;
   const isFree = (raw.PriceRange?.includes('$0.00') && !raw.PriceRange?.replace('$0.00', '').match(/\$[1-9]/)) ?? false;
@@ -40,8 +43,8 @@ export function normalizeClass(raw: PMClass): NormalizedClass {
     eventName: raw.EventName?.trim() ?? '',
     details: raw.Details ?? '',
     facility: raw.Facility ?? '',
-    startDate: startDate.toISOString(),
-    endDate: endDate.toISOString(),
+    startDate,
+    endDate,
     formattedStartDate: raw.FormattedStartDate,
     formattedStartTime: raw.FormattedStartTime,
     formattedEndTime: raw.FormattedEndTime,

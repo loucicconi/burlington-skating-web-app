@@ -1,4 +1,9 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { format, subDays, parseISO } from 'date-fns';
+
+function oneDayBefore(dateStr: string): string {
+  return format(subDays(parseISO(dateStr), 1), 'yyyy-MM-dd');
+}
 import type { FilterState } from '@/types/filters';
 import type { FilterGroup } from '@/types/filters';
 import type { NormalizedClass } from '@/types/class';
@@ -38,7 +43,9 @@ export function useClasses(filters: FilterState, filterGroups: FilterGroup[]) {
       };
       return fetchClassesPage(dateString, filters, filterGroups, page, after);
     },
-    initialPageParam: { dateString: filters.dateStart, page: 0 },
+    // Subtract 1 day: the PerfectMind API treats dateString as exclusive
+    // (returns events *after* that date), so we must send yesterday to include today.
+    initialPageParam: { dateString: oneDayBefore(filters.dateStart), page: 0 },
     getNextPageParam: (lastPage, allPages) => {
       if (!lastPage.nextKey) return undefined;
       if (filters.dateEnd && lastPage.nextKey > filters.dateEnd) return undefined;
