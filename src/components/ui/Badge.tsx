@@ -7,19 +7,19 @@ interface BadgeProps {
 }
 
 const variantClasses: Record<BadgeVariant, string> = {
-  green: 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200',
-  yellow: 'bg-amber-50 text-amber-700 ring-1 ring-amber-200',
-  red: 'bg-red-50 text-red-700 ring-1 ring-red-200',
-  blue: 'bg-indigo-50 text-indigo-700 ring-1 ring-indigo-200',
-  gray: 'bg-slate-50 text-slate-600 ring-1 ring-slate-200',
+  green:  'bg-[#e6f7ee] text-[#007a38] ring-1 ring-[#00a94f]/30',
+  yellow: 'bg-[#fff8e6] text-[#996500] ring-1 ring-[#ffc425]/40',
+  red:    'bg-red-50 text-red-700 ring-1 ring-red-200',
+  blue:   'bg-[#e6f0f8] text-[#005596] ring-1 ring-[#005596]/20',
+  gray:   'bg-slate-50 text-slate-600 ring-1 ring-slate-200',
 };
 
 const dotClasses: Record<BadgeVariant, string> = {
-  green: 'bg-emerald-500',
-  yellow: 'bg-amber-500',
-  red: 'bg-red-500',
-  blue: 'bg-indigo-500',
-  gray: 'bg-slate-400',
+  green:  'bg-[#00a94f]',
+  yellow: 'bg-[#ffc425]',
+  red:    'bg-red-500',
+  blue:   'bg-[#005596]',
+  gray:   'bg-slate-400',
 };
 
 export function Badge({ children, variant = 'gray', className = '' }: BadgeProps) {

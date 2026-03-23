@@ -9,23 +9,22 @@ interface ClassCardProps {
 }
 
 export function ClassCard({ item, onClick }: ClassCardProps) {
+  const accentColor = item.isFull ? 'bg-red-400' : item.isFree ? 'bg-[#00a94f]' : 'bg-[#005596]';
+
   return (
     <div
       onClick={() => onClick?.(item)}
       className="group relative bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 cursor-pointer overflow-hidden"
     >
-      {/* Accent bar */}
-      <div className={`absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl ${item.isFull ? 'bg-red-400' : 'bg-indigo-500'}`} />
+      <div className={`absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl ${accentColor}`} />
 
       <div className="pl-5 pr-4 pt-4 pb-4 flex flex-col gap-3">
-        {/* Top: name + price */}
         <div>
-          <h3 className="font-semibold text-slate-900 leading-snug text-[15px] group-hover:text-indigo-700 transition-colors line-clamp-2">
+          <h3 className="font-semibold text-slate-900 leading-snug text-[15px] group-hover:text-[#005596] transition-colors line-clamp-2">
             {item.eventName}
           </h3>
         </div>
 
-        {/* Meta row */}
         <div className="space-y-1.5">
           {item.facility && (
             <div className="flex items-center gap-1.5 text-slate-500 text-xs">
@@ -48,10 +47,9 @@ export function ClassCard({ item, onClick }: ClassCardProps) {
           </div>
         </div>
 
-        {/* Bottom: spots + price */}
         <div className="flex items-center justify-between pt-1 border-t border-slate-50">
           <SpotsBadge spotsText={item.spotsLeft} isFull={item.isFull} />
-          <span className={`text-sm font-semibold tabular-nums ${item.isFree ? 'text-emerald-600' : 'text-slate-700'}`}>
+          <span className={`text-sm font-semibold tabular-nums ${item.isFree ? 'text-[#00a94f]' : 'text-slate-700'}`}>
             {item.isFree ? 'Free' : item.priceRange}
           </span>
         </div>

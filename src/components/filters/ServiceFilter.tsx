@@ -21,8 +21,8 @@ export function ServiceFilter({ options, selected, onChange }: ServiceFilterProp
           <label key={opt.value} className="flex items-center gap-3 cursor-pointer group py-1">
             <div className={`w-4 h-4 rounded flex items-center justify-center flex-shrink-0 transition-colors border ${
               active
-                ? 'bg-indigo-500 border-indigo-500'
-                : 'bg-slate-800 border-slate-600 group-hover:border-slate-500'
+                ? 'bg-[#005596] border-[#005596]'
+                : 'bg-[#002237] border-[#00334f] group-hover:border-[#4d8ab5]'
             }`}>
               {active && (
                 <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -31,7 +31,7 @@ export function ServiceFilter({ options, selected, onChange }: ServiceFilterProp
               )}
             </div>
             <input type="checkbox" checked={active} onChange={() => toggle(opt.value)} className="sr-only" />
-            <span className={`text-sm transition-colors ${active ? 'text-slate-100' : 'text-slate-400 group-hover:text-slate-300'}`}>
+            <span className={`text-sm transition-colors ${active ? 'text-white' : 'text-[#4d8ab5] group-hover:text-slate-300'}`}>
               {opt.name}
             </span>
           </label>

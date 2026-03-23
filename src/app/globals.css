@@ -1,23 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  --sidebar-bg: #0a0f1e;
-  --sidebar-border: #1e2a3a;
-  --sidebar-hover: #111827;
-  --accent: #6366f1;
-  --accent-hover: #4f46e5;
+  /* Burlington brand */
+  --brand-blue:        #005596;
+  --brand-blue-dark:   #003d6b;
+  --brand-blue-mid:    #004a82;
+  --brand-blue-light:  #e6f0f8;
+  --brand-green:       #00a94f;
+  --brand-green-light: #e6f7ee;
+  --brand-yellow:      #ffc425;
+  --brand-yellow-dark: #cc9900;
+  --brand-yellow-light:#fff8e6;
+
+  /* Sidebar */
+  --sidebar-bg:     #001829;
+  --sidebar-border: #00243f;
+  --sidebar-hover:  #002237;
+  --sidebar-active: #005596;
 }
 
 @theme inline {
-  --color-background: #f8fafc;
-  --color-foreground: #0f172a;
+  --color-background: #f7f9fb;
+  --color-foreground: #0c1a2e;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html {
   -webkit-font-smoothing: antialiased;
@@ -25,34 +34,20 @@ html {
 }
 
 body {
-  background: #f8fafc;
-  color: #0f172a;
+  background: #f7f9fb;
+  color: #0c1a2e;
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
-/* Custom scrollbar — thin and clean */
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 99px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
+/* Custom thin scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-/* Dark sidebar scrollbar */
-.sidebar-scroll::-webkit-scrollbar-thumb {
-  background: #1e2a3a;
-}
-.sidebar-scroll::-webkit-scrollbar-thumb:hover {
-  background: #2d3f55;
-}
+/* Sidebar scrollbar */
+.sidebar-scroll::-webkit-scrollbar-thumb { background: #00243f; }
+.sidebar-scroll::-webkit-scrollbar-thumb:hover { background: #003355; }
 
 /* react-big-calendar overrides */
 .rbc-calendar {
@@ -68,18 +63,16 @@ body {
   color: #64748b;
   border-bottom: 1px solid #e2e8f0;
 }
-.rbc-today {
-  background-color: #eef2ff;
-}
-.rbc-off-range-bg {
-  background-color: #f8fafc;
-}
+.rbc-today { background-color: #e6f0f8; }
+.rbc-off-range-bg { background-color: #f7f9fb; }
 .rbc-event {
   border-radius: 4px;
   font-size: 0.72rem;
   padding: 1px 4px;
   border: none;
+  background-color: #005596;
 }
+.rbc-event.rbc-selected { background-color: #003d6b; }
 .rbc-toolbar button {
   border-radius: 8px;
   border: 1px solid #e2e8f0;
@@ -90,15 +83,15 @@ body {
 }
 .rbc-toolbar button.rbc-active,
 .rbc-toolbar button:hover {
-  background-color: #6366f1;
+  background-color: #005596;
   color: white;
-  border-color: #6366f1;
+  border-color: #005596;
   box-shadow: none;
 }
 .rbc-toolbar-label {
   font-weight: 700;
   font-size: 1rem;
-  color: #0f172a;
+  color: #0c1a2e;
 }
 .rbc-month-view,
 .rbc-time-view {
@@ -107,6 +100,4 @@ body {
   overflow: hidden;
 }
 .rbc-day-bg + .rbc-day-bg,
-.rbc-month-row + .rbc-month-row {
-  border-color: #e2e8f0;
-}
+.rbc-month-row + .rbc-month-row { border-color: #e2e8f0; }

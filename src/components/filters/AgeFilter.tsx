@@ -25,15 +25,14 @@ export function AgeFilter({ ageMin, ageMax, onChangeMin, onChangeMax }: AgeFilte
 
   const minLabel = local[0] === 0 ? 'Any' : `${local[0]}`;
   const maxLabel = local[1] >= 120 ? 'Any' : `${local[1]}`;
+  const label = minLabel === 'Any' && maxLabel === 'Any' ? 'All ages' : `${minLabel} – ${maxLabel}`;
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <span className="text-xs text-slate-500">Min</span>
-        <span className="text-xs font-semibold text-slate-200 bg-slate-800 px-2.5 py-1 rounded-lg">
-          {minLabel === maxLabel && minLabel === 'Any' ? 'All ages' : `${minLabel} – ${maxLabel}`}
+      <div className="flex justify-center">
+        <span className="text-xs font-semibold text-slate-200 bg-[#002237] border border-[#00334f] px-3 py-1 rounded-lg">
+          {label}
         </span>
-        <span className="text-xs text-slate-500">Max</span>
       </div>
       <Slider.Root
         className="relative flex items-center w-full h-5"
@@ -41,18 +40,23 @@ export function AgeFilter({ ageMin, ageMax, onChangeMin, onChangeMax }: AgeFilte
         value={local}
         onValueChange={setLocal}
       >
-        <Slider.Track className="relative h-1 flex-1 bg-slate-700 rounded-full">
-          <Slider.Range className="absolute h-full bg-indigo-500 rounded-full" />
+        <Slider.Track className="relative h-1 flex-1 bg-[#002237] rounded-full border border-[#00334f]">
+          <Slider.Range className="absolute h-full bg-[#005596] rounded-full" />
         </Slider.Track>
         <Slider.Thumb
-          className="block w-4 h-4 bg-white border-2 border-indigo-500 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-1 focus:ring-offset-slate-900"
+          className="block w-4 h-4 bg-white border-2 border-[#005596] rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-[#005596] focus:ring-offset-1 focus:ring-offset-[#001829]"
           aria-label="Minimum age"
         />
         <Slider.Thumb
-          className="block w-4 h-4 bg-white border-2 border-indigo-500 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-1 focus:ring-offset-slate-900"
+          className="block w-4 h-4 bg-white border-2 border-[#005596] rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-[#005596] focus:ring-offset-1 focus:ring-offset-[#001829]"
           aria-label="Maximum age"
         />
       </Slider.Root>
+      <div className="flex justify-between text-[10px] text-[#336b8a]">
+        <span>0</span>
+        <span>60</span>
+        <span>120+</span>
+      </div>
     </div>
   );
 }

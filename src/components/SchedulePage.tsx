@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 import { useFilters } from '@/hooks/useFilters';
 import { useFilterGroups } from '@/hooks/useFilterGroups';
@@ -25,23 +26,24 @@ export function SchedulePage() {
   const { classes, isLoading, isFetchingMore, error, fetchNextPage, hasMore } = useClasses(filters, filterGroups);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-slate-50">
-      {/* Dark sidebar */}
+    <div className="flex h-screen overflow-hidden bg-[#f7f9fb]">
       <FilterSidebar mobileOpen={mobileFiltersOpen} onClose={() => setMobileFiltersOpen(false)}>
-        {/* Sidebar branding */}
-        <div className="px-5 py-5 border-b border-slate-800 flex-shrink-0">
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-indigo-500 flex items-center justify-center flex-shrink-0">
-              <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5}
-                  d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <div>
-              <p className="text-white font-semibold text-sm leading-tight">Burlington</p>
-              <p className="text-slate-400 text-xs leading-tight">Recreation</p>
-            </div>
+
+        {/* Logo on white card */}
+        <div className="px-4 py-4 border-b border-[#00243f] flex-shrink-0">
+          <div className="bg-white rounded-xl px-4 py-2.5">
+            <Image
+              src="/logo.svg"
+              alt="City of Burlington"
+              width={180}
+              height={46}
+              className="w-full h-auto"
+              priority
+            />
           </div>
+          <p className="text-[#4d8ab5] text-[11px] font-medium mt-2.5 px-1 tracking-wide">
+            Recreation Schedule
+          </p>
         </div>
 
         {!filtersLoading && (
@@ -55,7 +57,6 @@ export function SchedulePage() {
         )}
       </FilterSidebar>
 
-      {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <Header
           view={view}

@@ -32,8 +32,8 @@ export function DayOfWeekFilter({ options, selected, onChange }: DayOfWeekFilter
             aria-pressed={active}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 ${
               active
-                ? 'bg-indigo-500 text-white shadow-sm shadow-indigo-900/40'
-                : 'bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-slate-200'
+                ? 'bg-[#005596] text-white shadow-sm'
+                : 'bg-[#002237] text-[#4d8ab5] border border-[#00334f] hover:bg-[#002a4a] hover:text-slate-200'
             }`}
           >
             {DAY_ABBREVS[opt.name] ?? opt.name}

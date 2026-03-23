@@ -17,7 +17,7 @@ export function Header({ view, onViewChange, resultCount, onOpenFilters, activeF
       {/* Mobile filter button */}
       <button
         onClick={onOpenFilters}
-        className="lg:hidden relative flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium transition-colors"
+        className="lg:hidden relative flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#e6f0f8] hover:bg-[#cce0f0] text-[#005596] text-sm font-medium transition-colors"
       >
         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -25,7 +25,7 @@ export function Header({ view, onViewChange, resultCount, onOpenFilters, activeF
         </svg>
         Filters
         {activeFilterCount > 0 && (
-          <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-indigo-500 text-white text-[10px] font-bold flex items-center justify-center">
+          <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-[#005596] text-white text-[10px] font-bold flex items-center justify-center">
             {activeFilterCount}
           </span>
         )}
@@ -35,24 +35,24 @@ export function Header({ view, onViewChange, resultCount, onOpenFilters, activeF
       <div className="flex-1 hidden sm:flex items-center gap-2">
         {isLoading ? (
           <div className="flex items-center gap-2 text-slate-400 text-sm">
-            <div className="w-3 h-3 rounded-full border-2 border-indigo-400 border-t-transparent animate-spin" />
+            <div className="w-3 h-3 rounded-full border-2 border-[#005596] border-t-transparent animate-spin" />
             Loading…
           </div>
         ) : resultCount > 0 ? (
           <span className="text-sm text-slate-500">
-            <span className="font-semibold text-slate-800">{resultCount.toLocaleString()}</span>
+            <span className="font-semibold text-[#005596]">{resultCount.toLocaleString()}</span>
             {' '}program{resultCount !== 1 ? 's' : ''}
           </span>
         ) : null}
       </div>
 
-      {/* View toggle — pill style */}
-      <div className="ml-auto flex items-center bg-slate-100 rounded-xl p-1 gap-0.5">
+      {/* View toggle — pill */}
+      <div className="ml-auto flex items-center bg-[#f0f4f8] rounded-xl p-1 gap-0.5">
         <button
           onClick={() => onViewChange('list')}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
             view === 'list'
-              ? 'bg-white text-slate-900 shadow-sm shadow-slate-200'
+              ? 'bg-white text-[#005596] shadow-sm'
               : 'text-slate-500 hover:text-slate-700'
           }`}
         >
@@ -65,7 +65,7 @@ export function Header({ view, onViewChange, resultCount, onOpenFilters, activeF
           onClick={() => onViewChange('calendar')}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
             view === 'calendar'
-              ? 'bg-white text-slate-900 shadow-sm shadow-slate-200'
+              ? 'bg-white text-[#005596] shadow-sm'
               : 'text-slate-500 hover:text-slate-700'
           }`}
         >
